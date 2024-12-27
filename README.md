@@ -1,3 +1,9 @@
+![Visits Badge](https://badges.pufler.dev/visits/bshongwe/eb-docker-nginx-proxy)
+![GitHub Repo Stars](https://img.shields.io/github/stars/bshongwe/eb-docker-nginx-proxy)
+![GitHub Forks](https://img.shields.io/github/forks/bshongwe/eb-docker-nginx-proxy)
+![GitHub Issues](https://img.shields.io/github/issues/bshongwe/eb-docker-nginx-proxy)
+![GitHub License](https://img.shields.io/github/license/bshongwe/eb-docker-nginx-proxy)
+
 # Elastic Beanstalk Multi Container PHP-FPM + Nginx Demo App
 
 This demo app shows you how to run a simple PHP application using the [PHP-FPM](https://registry.hub.docker.com/u/library/php/) and [Nginx](https://registry.hub.docker.com/u/library/nginx/) Docker images from the official Docker library.
