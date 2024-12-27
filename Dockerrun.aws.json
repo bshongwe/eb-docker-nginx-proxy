@@ -12,19 +12,35 @@
       "host": {
         "sourcePath": "/var/app/current/proxy/conf.d"
       }
-    }  
+    },
+    {
+      "name": "awseb-logs-nginx-proxy",
+      "host": {
+        "sourcePath": "/var/log/nginx"
+      }
+    },
+    {
+      "name": "awseb-logs-php-app",
+      "host": {
+        "sourcePath": "/var/log/php"
+      }
+    }
   ],
   "containerDefinitions": [
     {
       "name": "php-app",
-      "image": "php:fpm",
+      "image": "php:fpm-alpine",
       "essential": true,
-      "memory": 128,
+      "memory": 256,
       "mountPoints": [
         {
           "sourceVolume": "php-app",
           "containerPath": "/var/www/html",
           "readOnly": true
+        },
+        {
+          "sourceVolume": "awseb-logs-php-app",
+          "containerPath": "/var/log/php"
         }
       ]
     },
@@ -32,7 +48,7 @@
       "name": "nginx-proxy",
       "image": "nginx",
       "essential": true,
-      "memory": 128,
+      "memory": 256,
       "portMappings": [
         {
           "hostPort": 80,
@@ -57,7 +73,14 @@
           "containerPath": "/etc/nginx/conf.d",
           "readOnly": true
         }
-      ]
+      ],
+      "healthCheck": {
+        "command": ["CMD-SHELL", "curl -f http://localhost/ || exit 1"],
+        "interval": 30,
+        "timeout": 5,
+        "retries": 3,
+        "startPeriod": 10
+      }
     }
   ]
 }
